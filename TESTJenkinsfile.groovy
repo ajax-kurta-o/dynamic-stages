@@ -34,9 +34,8 @@ pipeline {
 
 def getDynamicStages() {
     try {
-        dynamicStagesFile = "${WORKSPACE}/scenarios/2024-01-07.groovy"
+        dynamicStagesFile = '/var/jenkins_home/workspace/TestPipeline2_dynamic-stages/scenarios/2024-01-07.groovy'
         sh '$(pwd)'
-        sh 'ls -la'
         sh 'echo in_dynamic'
         if (fileExists(dynamicStagesFile)) {
             sh 'echo file exist'

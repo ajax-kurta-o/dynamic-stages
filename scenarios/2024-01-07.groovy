@@ -1,7 +1,6 @@
 import org.jenkinsci.plugins.pipeline.modeldefinition.Utils
 
 def getStages() {
-
     return [
         [
             name: "Deploy services",
@@ -17,16 +16,7 @@ def getStages() {
                     )
                 }
             }
-        ],
-        [
-            name: "Run BDD tests",
-            steps: {
-                script {
-                    echo "In BDD Tests"
-
-                }
-            }
-        ],
+        ]
     ]
 }
 

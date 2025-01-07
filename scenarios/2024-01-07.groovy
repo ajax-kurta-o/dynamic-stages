@@ -12,7 +12,7 @@ def getStages() {
                         steps {
                             echo "In deploy a911-svc"
                         }
-                    },
+                    }
                     stage("Deploy mobile-gw-svc 1.29.0-8984.RELEASE") {
                         agent any
                         steps {

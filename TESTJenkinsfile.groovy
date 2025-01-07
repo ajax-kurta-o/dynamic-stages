@@ -6,7 +6,7 @@ pipeline {
         stage('ROLLOUT') {
                 steps {
                     sh "echo Rollout!"
-                    rollout_stage_passed = true
+                    script{ rollout_stage_passed = true }
                 }
         }
         stage("DYNAMIC_STAGES") {

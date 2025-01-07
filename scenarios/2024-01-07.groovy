@@ -4,7 +4,7 @@ def getStages() {
 
     return [
         [
-            name: "Deploy services"
+            name: "Deploy services",
             steps: {
                 parallel: {
                     stage("Deploy a911-svc 1.118.0-7447.RELEASE") {

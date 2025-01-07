@@ -6,14 +6,16 @@ def getStages() {
         [
             name: "Deploy services",
             steps: {
-                parallel(
-                    a: {
-                        echo "This is branch a"
-                    },
-                    b: {
-                        echo "This is branch b"
-                    }
-                )
+                script {
+                    parallel(
+                        a: {
+                            echo "This is branch a"
+                        },
+                        b: {
+                            echo "This is branch b"
+                        }
+                    )
+                }
             }
         ],
         [

@@ -34,8 +34,9 @@ pipeline {
 
 def getDynamicStages() {
     try {
-        dynamicStagesFile = "dynamic-stages/scenarios/2024-01-07.groovy"
+        dynamicStagesFile = "/scenarios/2024-01-07.groovy"
         if (fileExists(dynamicStagesFile)) {
+            sh 'echo file exist'
             return load(dynamicStagesFile).getStages()
         }
         return []

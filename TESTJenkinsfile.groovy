@@ -37,7 +37,6 @@ def getDynamicStages() {
         dynamicStagesFile = "${WORKSPACE}/scenarios/2024-01-07.groovy"
         sh '$(pwd)'
         sh 'ls -la'
-        sh 'echo ${WORKSPACE}/scenarios/2024-01-07.groovy'
         sh 'echo in_dynamic'
         if (fileExists(dynamicStagesFile)) {
             sh 'echo file exist'

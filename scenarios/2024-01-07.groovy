@@ -5,18 +5,17 @@ def getStages() {
     return [
         [
             name: "Deploy services"
-
             steps: {
                 parallel: {
-                    name: "Deploy a911-svc 1.118.0-7447.RELEASE",
-                    steps: {
-                        script {
+                    stage("Deploy a911-svc 1.118.0-7447.RELEASE") {
+                        agent any
+                        steps {
                             echo "In deploy a911-svc"
                         }
                     },
-                    name: "Deploy mobile-gw-svc 1.29.0-8984.RELEASE",
-                    steps: {
-                        script {
+                    stage("Deploy mobile-gw-svc 1.29.0-8984.RELEASE") {
+                        agent any
+                        steps {
                             echo "In deploy mobile-gw-svc"
                         }
                     }

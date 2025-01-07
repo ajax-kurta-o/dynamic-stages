@@ -39,8 +39,6 @@ def getDynamicStages() {
             return load(dynamicStagesFile).getStages()
         }
         return []
-
-        }
     }
     catch (Exception exc) {
         currentBuild.result = "UNSTABLE"

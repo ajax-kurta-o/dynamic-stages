@@ -1,4 +1,3 @@
-import org.jenkinsci.plugins.pipeline.modeldefinition.Utils
 
 def getStages() {
     return [

@@ -13,8 +13,7 @@ pipeline {
             steps {
                 script {
                     if (rollout_stage_passed == true) {
-                        var dynamicStagesCallable = getDynamicStages()
-                        dynamicStagesCallable()
+                        getDynamicStages()()
                     }
                     else {
                         echo "Skip running dynamic stages due to failed rollout process"

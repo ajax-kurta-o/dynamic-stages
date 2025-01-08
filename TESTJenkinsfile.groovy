@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     if (rollout_stage_passed == true) {
-                        getDynamicStages()()
+                        getDynamicStages()
                     }
                     else {
                         echo "Skip running dynamic stages due to failed rollout process"
@@ -32,7 +32,7 @@ def getDynamicStages() {
         sh 'echo in_dynamic'
         if (fileExists(dynamicStagesFile)) {
             sh 'echo file exist'
-            return load(dynamicStagesFile).getStages
+            return load(dynamicStagesFile).getStages()
         }
         return { echo 'File not exist!' }
     }

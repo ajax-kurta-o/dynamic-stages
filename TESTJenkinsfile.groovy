@@ -13,15 +13,10 @@ pipeline {
             steps {
                 script {
                     if (rollout_stage_passed == true) {
-                        def dynamicStages = getDynamicStages()
-                        dynamicStages.each { dynamicStage ->
+                        getDynamicStages().each { dynamicStage ->
                             stage(dynamicStage.name) {
-                                script {
-                                    parallel dynamicStage.steps.collectEntries { step ->
-                                        [(step.branch): {
-                                            sh step.command
-                                        }]
-                                    }
+                                dynamicStage.steps.each { step ->
+                                    step.call()
                                 }
                             }
                         }
@@ -34,6 +29,7 @@ pipeline {
         }
     }
 }
+
 
 
 def getDynamicStages() {

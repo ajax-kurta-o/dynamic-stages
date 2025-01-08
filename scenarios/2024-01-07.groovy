@@ -42,5 +42,6 @@ def getStages() {
         }
     }
 }
+}
 
 return this

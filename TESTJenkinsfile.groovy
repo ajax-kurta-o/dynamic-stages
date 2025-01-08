@@ -13,13 +13,8 @@ pipeline {
             steps {
                 script {
                     if (rollout_stage_passed == true) {
-                        getDynamicStages().each { dynamicStage ->
-                            stage(dynamicStage.name) {
-                                dynamicStage.steps.each { step ->
-                                    step.call()
-                                }
-                            }
-                        }
+                        dynamicStagesCallable = getDynamicStages()
+                        dynamicStagesCallable()
                     }
                     else {
                         echo "Skip running dynamic stages due to failed rollout process"
@@ -32,15 +27,15 @@ pipeline {
 
 
 
-def getDynamicStages() {
+Callable getDynamicStages() {
     try {
         dynamicStagesFile = '/var/jenkins_home/workspace/TestPipeline2_dynamic-stages/scenarios/2024-01-07.groovy'
         sh 'echo in_dynamic'
         if (fileExists(dynamicStagesFile)) {
             sh 'echo file exist'
-            return load(dynamicStagesFile).getStages()
+            return load(dynamicStagesFile).getStages
         }
-        return []
+        return { echo 'File not exist!' }
     }
     catch (Exception exc) {
         currentBuild.result = "UNSTABLE"

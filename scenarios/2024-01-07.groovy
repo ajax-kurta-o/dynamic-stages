@@ -1,5 +1,7 @@
 
 def getStages() {
+    pipeline {
+    agent any
     stages {
         stage('Run Deploy1') {
             parallel {

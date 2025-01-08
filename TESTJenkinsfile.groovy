@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     if (rollout_stage_passed == true) {
-                        dynamicStagesCallable = getDynamicStages()
+                        var dynamicStagesCallable = getDynamicStages()
                         dynamicStagesCallable()
                     }
                     else {

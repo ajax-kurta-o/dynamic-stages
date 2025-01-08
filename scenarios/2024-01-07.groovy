@@ -1,9 +1,5 @@
 import org.jenkinsci.plugins.pipeline.modeldefinition.Utils
 
-steps = [
-
-]
-
 def getStages() {
     return [
         [
@@ -17,10 +13,16 @@ def getStages() {
 }
 
 def performStages(stages) {
-    stages.each {
-        dynamicStage -> stage(dynamicStage.name) {
-            dynamicStage.steps.each {
-                step -> step.call()
+    return {
+        stages.each { dynamicStage ->
+            stage(dynamicStage.name) {
+                script {
+                    parallel dynamicStage.steps.collectEntries { step ->
+                        [(step.branch): {
+                            sh step.command
+                        }]
+                    }
+                }
             }
         }
     }

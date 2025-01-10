@@ -2,20 +2,17 @@ import org.jenkinsci.plugins.pipeline.modeldefinition.Utils
 
 def performStages() {
     return {
-        stage("Deploy services") {
-                parallel {
-                    stage("deploy_a") {
-                        steps {
-                            sh "echo 'This is stage a'"
-                        }
-                    }
-                    stage("deploy_b") {
-                        steps {
-                            sh "echo 'This is stage b'"
-                        }
-                    }
+        parallel {
+            stage("deploy_a") {
+                steps {
+                    sh "echo 'This is stage a'"
                 }
-
+            }
+            stage("deploy_b") {
+                steps {
+                    sh "echo 'This is stage b'"
+                }
+            }
         }
         stage("Run BDD tests") {
             stage("Run tests") {

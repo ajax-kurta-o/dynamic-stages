@@ -9,8 +9,7 @@ parallel_stages_1 = [
                 [stage_name: "deploy_b", steps: [ {"echo 'This is stage b'"} ],
             ]
         ]
-    ]
-}
+]
 
 run_1 = [
     [

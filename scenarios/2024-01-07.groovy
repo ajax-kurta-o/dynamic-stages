@@ -2,22 +2,28 @@ import org.jenkinsci.plugins.pipeline.modeldefinition.Utils
 
 def performStages() {
     return {
-        stage('Deploy Services') {
-            parallel {
-                stage('Deploy A') {
-                    agent any
-                    steps {
-                        sh "echo 'This is stage a'"
+        def parallelStages1 = [
+            [
+                name: "Deploy services",
+                stages: [
+                    [stage_name: "deploy_a", steps: [ { -> sh "echo 'This is stage a'" } ]],
+                    [stage_name: "deploy_b", steps: [ { -> sh "echo 'This is stage b'" } ]]
+                ]
+            ]
+        ]
+
+        parallel parallelStages1.collectEntries { dynamicStage ->
+            [(dynamicStage.name): {
+                dynamicStage.stages.each { stage ->
+                    stage(stage.stage_name) {
+                        stage.steps.each { step ->
+                            step.call()
+                        }
                     }
                 }
-                stage('Deploy B') {
-                    agent any
-                    steps {
-                        sh "echo 'This is stage b'"
-                    }
-                }
-            }
+            }]
         }
+
         stage('Run BDD Tests') {
             stage('Run Tests') {
                 steps {
@@ -29,3 +35,4 @@ def performStages() {
 }
 
 return this
+

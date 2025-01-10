@@ -9,16 +9,9 @@ pipeline {
                 }
         }
         stage("DYNAMIC_STAGES") {
-            steps {
-                script {
-                    if (rollout_stage_passed) {
-                        def dynamicLib = getDynamicStages()
-                        dynamicLib.perform()
-                    } else {
-                        echo "Skip running dynamic stages due to failed rollout process"
-                    }
-                }
-            }
+            def dynamicLib = getDynamicStages()
+            dynamicLib.perform()
+
         }
     }
 }

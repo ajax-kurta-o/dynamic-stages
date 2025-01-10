@@ -6,15 +6,15 @@ def performStages() {
         stage("Deploy services") {
             script {
                 parallel {
-                        stage("deploy_a") {
-                            steps {
-                                sh "echo 'This is stage a'"
-                            }
-                        },
-                        stage("deploy_b") {
-                            steps {
-                                sh "echo 'This is stage b'"
-                            }
+                    stage("deploy_a") {
+                        steps {
+                            sh "echo 'This is stage a'"
+                        }
+                    }
+                    stage("deploy_b") {
+                        steps {
+                            sh "echo 'This is stage b'"
+                        }
                     }
                 }
             }

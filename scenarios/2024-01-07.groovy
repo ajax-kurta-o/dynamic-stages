@@ -34,8 +34,8 @@ def performStages() {
                 }
             }
 
-            // Sequentially run tests after parallel stages
-            run1.each { sequentialStage ->
+        }
+        run1.each { sequentialStage ->
                 stage(sequentialStage.name) {
                     sequentialStage.stages.each { stage ->
                         stage(stage.stage_name) {
@@ -46,7 +46,6 @@ def performStages() {
                     }
                 }
             }
-        }
     }
 }
 

@@ -48,6 +48,5 @@ def performStages() {
     }
 }
 
-return this
 
 return this

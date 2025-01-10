@@ -8,16 +8,16 @@ def performStages() {
         [
             name: "Deploy services",
             stages: [
-                    [stage_name: "deploy_a", steps: [ {"echo 'This is stage a'"} ],
-                    [stage_name: "deploy_b", steps: [ {"echo 'This is stage b'"} ],
+                    [stage_name: "deploy_a", steps: [ {"echo 'This is stage a'"} ]],
+                    [stage_name: "deploy_b", steps: [ {"echo 'This is stage b'"} ]],
                 ]
-            ]
+        ]
     ]
 
     run_1 = [
         [
             name: "Run BDD tests"
-            stages: [stage_name: "Run tests", steps: [ {echo 'Run tests'} ],
+            stages: [stage_name: "Run tests", steps: [ {echo 'Run tests'} ]],
          ]
     ]
     return {

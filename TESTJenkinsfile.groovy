@@ -1,5 +1,4 @@
 import org.jenkinsci.plugins.pipeline.modeldefinition.Utils
-
 pipeline {
     agent any
     stages {
@@ -28,7 +27,7 @@ pipeline {
 
 def getDynamicStages() {
     try {
-        dynamicStagesFile = '/var/jenkins_home/workspace/TestPipeline2_dynamic-stages/scenarios/2024-01-07.groovy'
+        dynamicStagesFile = '/var/jenkins_home/workspace/TestPipeline2_dynamic-stages/scenarios/performStages.groovy'
         sh 'echo in_dynamic'
         if (fileExists(dynamicStagesFile)) {
             sh 'echo file exist'

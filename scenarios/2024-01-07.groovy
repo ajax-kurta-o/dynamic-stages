@@ -35,7 +35,7 @@ stage('Parallel Stage') {
         }
     }
 }
-}
+
 
 
 

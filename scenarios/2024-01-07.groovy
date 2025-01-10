@@ -1,37 +1,51 @@
 import org.jenkinsci.plugins.pipeline.modeldefinition.Utils
 
 def performStages() {
-    def parallelStages1 = [
-        [
-            name: "Deploy services",
-            stages: [
-                [stage_name: "deploy_a", steps: [ { -> sh "echo 'This is stage a'" } ]],
-                [stage_name: "deploy_b", steps: [ { -> sh "echo 'This is stage b'" } ]]
-            ]
-        ]
-    ]
-
-    def run1 = [
-        [
-            name: "Run BDD tests",
-            stages: [
-                [stage_name: "Run tests", steps: [ { -> sh "echo 'Run tests'" } ]]
-            ]
-        ]
-    ]
-
     return {
-        parallel {
-            parallelStages1.collectEntries { dynamicStage ->
-                [(dynamicStage.name): {
-                    dynamicStage.stages.each { stage ->
-                        stage(stage.stage_name) {
-                            stage.steps.each { step ->
-                                step.call()
+        stage('Non-Parallel Stage') {
+            steps {
+                echo 'This stage will be executed first.'
+            }
+        }
+        stage('Parallel Stage') {
+            when {
+                branch 'master'
+            }
+            failFast true
+            parallel {
+                stage('Branch A') {
+                    agent {
+                        label "for-branch-a"
+                    }
+                    steps {
+                        echo "On Branch A"
+                    }
+                }
+                stage('Branch B') {
+                    agent {
+                        label "for-branch-b"
+                    }
+                    steps {
+                        echo "On Branch B"
+                    }
+                }
+                stage('Branch C') {
+                    agent {
+                        label "for-branch-c"
+                    }
+                    stages {
+                        stage('Nested 1') {
+                            steps {
+                                echo "In stage Nested 1 within Branch C"
+                            }
+                        }
+                        stage('Nested 2') {
+                            steps {
+                                echo "In stage Nested 2 within Branch C"
                             }
                         }
                     }
-                }]
+                }
             }
         }
     }

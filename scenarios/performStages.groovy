@@ -1,4 +1,5 @@
 def perform() {
+    stages{
     stage('Non-Parallel Stage') {
         steps {
             echo 'This stage will be executed first.'
@@ -35,7 +36,7 @@ def perform() {
                 }
             }
         }
-    }
+    }}
 }
 
 return this

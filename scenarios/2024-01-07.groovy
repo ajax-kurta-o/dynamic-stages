@@ -8,9 +8,7 @@ def performStages() {
 //             }
 //         }
         stage('Parallel Stage') {
-            when {
-                branch 'master'
-            }
+
             failFast true
             parallel {
                 stage('Branch A') {

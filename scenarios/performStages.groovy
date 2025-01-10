@@ -37,3 +37,5 @@ def perform() {
         }
     }
 }
+
+return this

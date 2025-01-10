@@ -1,24 +1,25 @@
 import org.jenkinsci.plugins.pipeline.modeldefinition.Utils
 
 
-parallel_stages_1 = [
+
+
+def performStages() {
+    parallel_stages_1 = [
         [
             name: "Deploy services",
             stages: [
-                [stage_name: "deploy_a", steps: [ {"echo 'This is stage a'"} ],
-                [stage_name: "deploy_b", steps: [ {"echo 'This is stage b'"} ],
+                    [stage_name: "deploy_a", steps: [ {"echo 'This is stage a'"} ],
+                    [stage_name: "deploy_b", steps: [ {"echo 'This is stage b'"} ],
+                ]
             ]
-        ]
-]
+    ]
 
-run_1 = [
-    [
-        name: "Run BDD tests"
-        stages: [stage_name: "Run tests", steps: [ {echo 'Run tests'} ],
-     ]
-]
-
-def performStages() {
+    run_1 = [
+        [
+            name: "Run BDD tests"
+            stages: [stage_name: "Run tests", steps: [ {echo 'Run tests'} ],
+         ]
+    ]
     return {
         parallel_stages_1.each { dynamicStage ->
             stage(dynamicStage.name) {

@@ -2,7 +2,6 @@ stage('Non-Parallel Stage') {
   echo 'This stage will be executed first.'
 }
 stage('Parallel Stage') {
-    failFast true
     parallel {
         stage('Branch A') {
             agent any

@@ -4,11 +4,13 @@ def performStages() {
     return {
         parallel {
             stage("deploy_a") {
+                agent any
                 steps {
                     sh "echo 'This is stage a'"
                 }
             }
             stage("deploy_b") {
+                agent any
                 steps {
                     sh "echo 'This is stage b'"
                 }

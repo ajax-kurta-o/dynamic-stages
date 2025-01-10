@@ -1,8 +1,5 @@
 import org.jenkinsci.plugins.pipeline.modeldefinition.Utils
 
-
-
-
 def performStages() {
     def parallelStages1 = [
         [
@@ -36,8 +33,23 @@ def performStages() {
                     }
                 }
             }
+
+            // Sequentially run tests after parallel stages
+            run1.each { sequentialStage ->
+                stage(sequentialStage.name) {
+                    sequentialStage.stages.each { stage ->
+                        stage(stage.stage_name) {
+                            stage.steps.each { step ->
+                                step.call()
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
+
+return this
 
 return this

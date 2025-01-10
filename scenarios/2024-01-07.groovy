@@ -8,7 +8,6 @@ def performStages() {
             }
         }
         stage('Parallel Stage') {
-
             failFast true
             parallel {
                 stage('Branch A') {
@@ -44,5 +43,6 @@ def performStages() {
 }
 
 return this
+
 
 

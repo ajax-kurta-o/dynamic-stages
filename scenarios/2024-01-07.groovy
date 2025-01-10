@@ -2,7 +2,6 @@ import org.jenkinsci.plugins.pipeline.modeldefinition.Utils
 
 def performStages() {
     return {
-        // Parallel stages for "Deploy services"
         stage("Deploy services") {
             script {
                 parallel {
@@ -19,8 +18,6 @@ def performStages() {
                 }
             }
         }
-
-        // Sequential stage for "Run BDD tests"
         stage("Run BDD tests") {
             stage("Run tests") {
                 steps {

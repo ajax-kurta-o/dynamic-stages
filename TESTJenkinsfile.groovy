@@ -9,8 +9,11 @@ pipeline {
                 }
         }
         stage("DYNAMIC_STAGES") {
-            def dynamicLib = getDynamicStages()
-            dynamicLib.perform()
+            steps {
+                def dynamicLib = getDynamicStages()
+                dynamicLib.perform()
+            }
+
 
         }
     }

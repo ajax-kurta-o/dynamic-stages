@@ -2,11 +2,11 @@ import org.jenkinsci.plugins.pipeline.modeldefinition.Utils
 
 def performStages() {
     return {
-//         stage('Non-Parallel Stage') {
-//             steps {
-//                 echo 'This stage will be executed first.'
-//             }
-//         }
+        stage('Non-Parallel Stage') {
+            steps {
+                echo 'This stage will be executed first.'
+            }
+        }
         stage('Parallel Stage') {
 
             failFast true

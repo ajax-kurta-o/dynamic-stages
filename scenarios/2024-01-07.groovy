@@ -22,13 +22,7 @@ def performStages() {
                 }
             }]
         }
-        stage('Run BDD Tests') {
-            stage('Run Tests') {
-                steps {
-                    sh "echo 'Run tests'"
-                }
-            }
-        }
+
     }
 }
 

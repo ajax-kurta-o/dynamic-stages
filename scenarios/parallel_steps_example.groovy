@@ -36,7 +36,7 @@ def performStages() {
     },
     {
         run1.each { sequentialStage ->
-            stage(sequentialStage.name) {
+            stage(sequentialStage.stage_name) {
                 sequentialStage.stages[0].steps.each { step ->
                             step.call()
                 }

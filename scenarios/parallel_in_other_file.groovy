@@ -12,7 +12,7 @@ def performStages() {
         parallel dynamicStage.stages.each { stage_info ->
             stage (stage_info.stage_name) {
                 stage_info.steps.each { step ->
-                    step.call()
+                    step
                 }
             }
         }

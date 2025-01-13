@@ -2,9 +2,9 @@
 parallelStages1 = [
     [
         name: "Deploy services",
-        stages: [
-            [stage_name: "deploy_a", steps: [ { -> sh "echo 'This is stage a'" } ]],
-            [stage_name: "deploy_b", steps: [ { -> sh "echo 'This is stage b'" } ]]
+        branches: [
+            [branch_name: "deploy_a", steps: [ script { echo "This is stage a"} ]],
+            [branch_name: "deploy_b", steps: [ script { echo "This is stage b"} } ]]
         ]
     ]
 ]
@@ -12,8 +12,8 @@ parallelStages1 = [
 run1 = [
         [
             name: "Run BDD tests",
-            stages: [
-                [stage_name: "Run tests", steps: [ { -> sh "echo 'Run tests'" } ]]
+            branches: [
+                [branch_name: "Run tests", steps: [ { -> sh "echo 'Run tests'" } ]]
             ]
         ]
     ]

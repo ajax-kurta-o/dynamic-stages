@@ -10,6 +10,12 @@ pipeline {
         stage("DYNAMIC_STAGES") {
             steps {
                 script {
+                    def dynamicStage = [
+                        stages: [
+                            [stage_name: "deploy_a", steps: [ { -> sh "echo 'This is stage a'" } ]],
+                            [stage_name: "deploy_b", steps: [ { -> sh "echo 'This is stage b'" } ]]
+                        ]
+                    ]
                     for (int i = 1; i <= 2; i++) {
                         parallel dynamicStage.stages.each {
                              separate_stage -> stage (separate_stage.stage_name) {
@@ -25,9 +31,4 @@ pipeline {
     }
 }
 
-def dynamicStage = [
-        stages: [
-            [stage_name: "deploy_a", steps: [ { -> sh "echo 'This is stage a'" } ]],
-            [stage_name: "deploy_b", steps: [ { -> sh "echo 'This is stage b'" } ]]
-        ]
-    ]
+

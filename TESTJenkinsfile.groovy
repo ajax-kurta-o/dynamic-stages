@@ -11,88 +11,16 @@ pipeline {
         stage("DYNAMIC_STAGES") {
             steps {
                 script {
-                    if (rollout_stage_passed) {
-                        stage('Parallel Stage') {
-        failFast true
-        parallel {
-            stage('Branch A') {
-                agent any
-                steps {
-                    echo "On Branch A"
-                }
-            }
-            stage('Branch B') {
-                agent any
-                steps {
-                    echo "On Branch B"
-                }
-            }
-            stage('Branch C') {
-                agent any
-                stages {
-                    stage('Nested 1') {
-                        steps {
-                            echo "In stage Nested 1 within Branch C"
-                        }
-                    }
-                    stage('Nested 2') {
-                        steps {
-                            echo "In stage Nested 2 within Branch C"
-                        }
-                    }
-                }
-            }
-        }
-    }
-                    } else {
+                    if (rollout_stage_passed == true) {
 
                     }
-                }
-            }
-        }
-    }
-}
-
-def sequentialCall() {
-    stage('Non-Parallel Stage') {
-        steps {
-            echo 'This stage will be executed first.'
-        }
-    }
-}
-
-def parallelCall() {
-    stage('Parallel Stage') {
-        failFast true
-        parallel {
-            stage('Branch A') {
-                agent any
-                steps {
-                    echo "On Branch A"
-                }
-            }
-            stage('Branch B') {
-                agent any
-                steps {
-                    echo "On Branch B"
-                }
-            }
-            stage('Branch C') {
-                agent any
-                stages {
-                    stage('Nested 1') {
-                        steps {
-                            echo "In stage Nested 1 within Branch C"
-                        }
-                    }
-                    stage('Nested 2') {
-                        steps {
-                            echo "In stage Nested 2 within Branch C"
-                        }
+                    else {
+                        echo "Skip running dynamic stages due to failed rollout process"
                     }
                 }
             }
         }
+
     }
 }
 
@@ -100,7 +28,7 @@ def parallelCall() {
 
 def getDynamicStages() {
     try {
-        dynamicStagesFile = '/var/jenkins_home/workspace/TestPipeline2_dynamic-stages/scenarios/performStages.groovy'
+        dynamicStagesFile = '/Users/oleksandrkurta/WORK/own-dynamic-stages/scenarios/2024-12-07.groovy'
         sh 'echo in_dynamic'
         if (fileExists(dynamicStagesFile)) {
             sh 'echo file exist'

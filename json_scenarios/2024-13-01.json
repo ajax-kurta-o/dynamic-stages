@@ -1,0 +1,50 @@
+{
+  "scenarioName": "Test Scenario",
+  "date": "2024-12-07",
+  "stages": [
+    {
+      "name": "deployService",
+      "parameters": {
+        "serviceName": "external-device-svc",
+        "serviceVersion": "1.36.1-306.RELEASE"
+      }
+    },
+    {
+      "name": "deployService",
+      "parameters": {
+        "serviceName": "mobile-svc",
+        "serviceVersion": "1.36.1-306.RELEASE"
+      }
+    },
+    {
+      "name": "runTests",
+      "parameters": {
+        "marks": [
+          "regress"
+        ]
+      }
+    },
+    {
+      "name": "deployService",
+      "parameters": {
+        "serviceName": "a911-device-svc",
+        "serviceVersion": "1.36.1*.RELEASE"
+      }
+    },
+    {
+      "name": "deployService",
+      "parameters": {
+        "serviceName": "desktop-device-svc",
+        "serviceVersion": "1.36.1*.RELEASE"
+      }
+    },
+    {
+      "name": "runTests",
+      "parameters": {
+        "marks": [
+          "regress"
+        ]
+      }
+    }
+  ]
+}

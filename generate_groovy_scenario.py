@@ -2,18 +2,19 @@ import argparse
 import json
 
 from helpers import get_logger
-from rc_groovy_scenario_builder import RCGroovyScenarioBuilder
+from updated_groovy_builder import RCGroovyScenarioBuilder
 from loguru import logger as LoguruLogger
 
 
 def generate_groovy_file(json_scenario: dict, logger: LoguruLogger):
     builder = RCGroovyScenarioBuilder(
-        scenario_name=json_scenario,
+        scenario=json_scenario,
         logger=logger,
-
+        parallel_deployment=True
     )
-
+    builder.build()
     builder.save_groovy_file()
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -21,7 +22,7 @@ def main():
         "--json_scenario_path",
         type=str,
         help="Path to json file with RC testing scenario",
-        required=True
+        default="/Users/oleksandrkurta/WORK/own-dynamic-stages/json_scenarios/2024-13-01.json",
     )
     args = parser.parse_args()
     logger = get_logger()

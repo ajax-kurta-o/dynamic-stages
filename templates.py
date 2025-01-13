@@ -1,5 +1,16 @@
 from string import Template
 
+
+BASE_PIPELINE_TEMPLATE = Template("""
+pipeline {
+    agent any
+    stages {
+        ${stages_groovy}
+    }
+}
+""")
+
+
 BASE_GROOVY_TEMPLATE = Template("""
 import org.jenkinsci.plugins.pipeline.modeldefinition.Utils
 
@@ -30,9 +41,8 @@ return this
 """)
 
 DEPLOY_SVC_TEMPLATE = Template("""
-        [
-            name: "$stage_name",
-            steps: {
+        stage("$stage_name") {
+            steps{
                 script {
                     dynamicStagesResults = getDynamicStagesResults()
                     if (dynamicStagesResults.every { stage_passed -> stage_passed.value == true }) {
@@ -40,7 +50,7 @@ DEPLOY_SVC_TEMPLATE = Template("""
                             serviceName="$service_name",
                             serviceVersionPattern="$service_version"
                         )
-
+    
                         dynamicStagesResults['$stage_passed_variable'] = rc_testing.deployService(
                             serviceName="$service_name",
                             serviceVersion=serviceVersionFromPattern,
@@ -52,29 +62,28 @@ DEPLOY_SVC_TEMPLATE = Template("""
                         echo "Skip deploy due to failure: ${failedStage} == false"
                         Utils.markStageSkippedForConditional(env.STAGE_NAME)
                     }
-
+    
                     env.dynamicStagesResults = groovy.json.JsonOutput.toJson(dynamicStagesResults)
                 }
             }
-        ],
+        }
 """)
 
 PARALLEL_DEPLOY_TEMPLATE = Template("""
-    [
-        name: "$parallel_run_name"
-        parallel: {
-            
+    stage('Parallel Deployments') {
+            fastFail: True
+            parallel {
+               ${parallel_stages}
+            }
         }
-    ]
 """)
 
 RUN_BDD_TESTS_TEMPLATE = Template("""
-        [
-            name: "$stage_name",
-            steps: {
+        stage("$stage_name") {
+            steps{
                 script {
                     dynamicStagesResults = getDynamicStagesResults()
-
+    
                     if (dynamicStagesResults.every { stage_passed -> stage_passed.value == true }) {
                         rc_testing.clearDatabases()
                         rc_testing.respawnActors()
@@ -84,7 +93,7 @@ RUN_BDD_TESTS_TEMPLATE = Template("""
                         def failedStage = dynamicStagesResults.find { stage_passed -> stage_passed.value == false }?.key
                         echo "Skip setup generation due to failure: ${failedStage} == false"
                     }
-
+    
                     if (dynamicStagesResults.every { stage_passed -> stage_passed.value == true }) {
                         rc_testing.runBDDTests(
                             marks='$marks',
@@ -98,9 +107,9 @@ RUN_BDD_TESTS_TEMPLATE = Template("""
                             Utils.markStageSkippedForConditional(env.STAGE_NAME)
                         }
                     }
-
+    
                     env.dynamicStagesResults = ""
                 }
             }
-        ],
+        }
 """)

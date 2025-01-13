@@ -16,8 +16,8 @@ def performStages() {
                         step.call()
                 }
 
-             }
-        }.call()
+             }.call()
+        }
     }
 }
 

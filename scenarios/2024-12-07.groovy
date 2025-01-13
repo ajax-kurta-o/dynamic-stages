@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-            stage('Parallel Deployments') {
+            stage('Parallel Deployments1') {
                 parallel {
                     stage("Deploy external-device-svc 1.36.1-306.RELEASE") {
                         steps{
@@ -20,14 +20,14 @@ pipeline {
                     }
                 }
             }
-            stage("Run BDD tests with marks: marks") {
+            stage("Run BDD tests with marks: marks1") {
                 steps{
                     script {
                         echo "run tests"
                     }
                 }
             }
-            stage('Parallel Deployments') {
+            stage('Parallel Deployments2') {
                 parallel {
                       stage("Deploy a911-device-svc 1.36.1*.RELEASE") {
                           steps{
@@ -46,7 +46,7 @@ pipeline {
                       }
                 }
             }
-            stage("Run BDD tests with marks: marks") {
+            stage("Run BDD tests with marks: marks2") {
                 steps{
                     script {
                        echo "Run BDD tests with marks: marks"

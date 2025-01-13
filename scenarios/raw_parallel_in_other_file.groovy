@@ -1,6 +1,6 @@
 def performStages() {
     return {
-        parallel {
+        -> parallel {
                 stage('Branch A') {
                     agent any
                     steps {

@@ -14,6 +14,13 @@ pipeline {
 //                         getDynamicStages().each { dynamicStage ->
 //                             dynamicStage.call()
 //                         }
+//                          getDynamicStages().each { dynamicStage ->
+//                             stage(dynamicStage.name) {
+//                                 dynamicStage.steps.each { step ->
+//                                     step.call()
+//                                 }
+//                             }
+//                         }
                         def dynamicLib = getDynamicStages()
                         def performStages = dynamicLib.performStages()
                         performStages()

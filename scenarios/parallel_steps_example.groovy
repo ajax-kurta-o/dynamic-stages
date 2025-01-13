@@ -26,7 +26,10 @@ def performStages() {
                     parallel dynamicStage.stages.collectEntries { stage ->
                         [(stage.stage_name): {
                             stage.steps.each { step ->
-                                step.call()
+                                step
+
+
+
                             }
                         }]
                     }

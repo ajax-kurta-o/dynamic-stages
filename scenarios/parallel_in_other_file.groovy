@@ -10,12 +10,12 @@ def performStages() {
 
     return {
         parallel dynamicStage.stages.each {
-             separate_stage -> {
+             separate_stage ->
                 stage (separate_stage.stage_name) {
                     separate_stage.steps.each { step ->
                         step.call()
                     }
-                }
+
              }
         }
     }

@@ -14,10 +14,10 @@ def performStages() {
                 stage (separate_stage.stage_name) {
                     separate_stage.steps.each { step ->
                         step.call()
-                    }
+                }
 
              }
-        }
+        }.call()
     }
 }
 

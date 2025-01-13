@@ -12,8 +12,8 @@ pipeline {
                 script {
                     for (int i = 1; i <= 2; i++) {
                         parallel dynamicStage.stages.each {
-                             stage -> stage (stage.stage_name) {
-                                    stage.steps.each { step ->
+                             separate_stage -> stage (separate_stage.stage_name) {
+                                    separate_stage.steps.each { step ->
                                         step.call()
                                     }
                              }

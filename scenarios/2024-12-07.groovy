@@ -2,7 +2,7 @@ pipeline {
     agent any
     stages {
             stage('Parallel Deployments1') {
-            fastFail true
+            failFast true
             parallel {
                        stage("Deploy external-device-svc 1.36.1-306.RELEASE") {
             steps{
@@ -29,7 +29,7 @@ pipeline {
             }
         }
     stage('Parallel Deployments2') {
-            fastFail true
+            failFast true
             parallel {
                        stage("Deploy a911-device-svc 1.36.1*.RELEASE") {
             steps{

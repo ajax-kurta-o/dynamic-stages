@@ -25,7 +25,7 @@ pipeline {
 
 def getDynamicStages() {
     try {
-        def dynamicStagesFile = '/var/jenkins_home/workspace/TestPipeline2_dynamic-stages/scenarios/2024-01-07.groovy'
+        def dynamicStagesFile = '/Users/oleksandrkurta/WORK/own-dynamic-stages/scenarios/first_example.groovy'
         if (fileExists(dynamicStagesFile)) {
             return load(dynamicStagesFile)
         }

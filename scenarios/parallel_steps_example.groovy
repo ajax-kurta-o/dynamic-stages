@@ -1,26 +1,29 @@
-def performStages() {
-    def parallelStages1 = [
+
+def parallelStages1 = [
+    [
+        name: "Deploy services",
+        stages: [
+            [stage_name: "deploy_a", steps: [ { -> sh "echo 'This is stage a'" } ]],
+            [stage_name: "deploy_b", steps: [ { -> sh "echo 'This is stage b'" } ]]
+        ]
+    ]
+]
+
+def run1 = [
         [
-            name: "Deploy services",
+            name: "Run BDD tests",
             stages: [
-                [stage_name: "deploy_a", steps: [ { -> sh "echo 'This is stage a'" } ]],
-                [stage_name: "deploy_b", steps: [ { -> sh "echo 'This is stage b'" } ]]
+                [stage_name: "Run tests", steps: [ { -> sh "echo 'Run tests'" } ]]
             ]
         ]
     ]
 
-    def run1 = [
-            [
-                name: "Run BDD tests",
-                stages: [
-                    [stage_name: "Run tests", steps: [ { -> sh "echo 'Run tests'" } ]]
-                ]
-            ]
-        ]
+
+
+def performStages() {
 
 
     return {
-        {
         parallelStages1.each { dynamicStage ->
             stage(dynamicStage.name) {
                 script {
@@ -33,7 +36,7 @@ def performStages() {
                     }
                 }
             }
-        }}{
+        }
         run1.each { dynamicStage ->
                 stage(dynamicStage.name) {
                     script {
@@ -42,7 +45,7 @@ def performStages() {
                         }
                     }
                 }
-        }}
+        }
     }
 }
 

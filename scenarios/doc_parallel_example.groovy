@@ -10,25 +10,20 @@ pipeline {
             failFast true
             parallel {
                 stage('Branch A') {
-                    agent {
-                        label any
-                    }
+                    agent any
                     steps {
                         echo "On Branch A"
                     }
                 }
                 stage('Branch B') {
-                    agent {
-                        label any
-                    }
+                    agent any
                     steps {
                         echo "On Branch B"
                     }
                 }
                 stage('Branch C') {
-                    agent {
-                        label any
-                    }
+                    agent any
+
                     stages {
                         stage('Nested 1') {
                             steps {

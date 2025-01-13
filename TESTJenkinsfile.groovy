@@ -11,7 +11,6 @@ pipeline {
             steps {
                 script {
                     if (rollout_stage_passed) {
-                        def dynamicLib = getDynamicStages()
                         def performStages = dynamicLib.performStages()
                         performStages.call() // Invoke the closure
                     } else {

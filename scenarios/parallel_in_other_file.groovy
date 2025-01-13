@@ -9,14 +9,13 @@ def performStages() {
     ]
 
     return {
-        parallel dynamicStage.stages.each {
-             separate_stage ->
+        parallel dynamicStage.stages.each { separate_stage ->
                 stage (separate_stage.stage_name) {
                     separate_stage.steps.each { step ->
                         step.call()
                 }
 
-             }.call()
+            }
         }
     }
 }

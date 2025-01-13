@@ -19,7 +19,7 @@ def performStages() {
         ]
 
 
-    return [{
+    return {
         parallelStages1.each { dynamicStage ->
             stage(dynamicStage.name) {
                 script {
@@ -33,16 +33,7 @@ def performStages() {
                 }
             }
         }
-    },
-    {
-        run1.each { sequentialStage ->
-            stage(sequentialStage.stage_name) {
-                sequentialStage.stages[0].steps.each { step ->
-                            step.call()
-                }
-            }
-        }
-    }]
+    }
 }
 
 return this

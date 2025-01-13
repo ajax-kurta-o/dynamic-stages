@@ -34,15 +34,15 @@ def performStages() {
             }
         }
     },
-
-        {run1.each { sequentialStage ->
+    {
+        run1.each { sequentialStage ->
             stage(sequentialStage.name) {
                 sequentialStage.stage[0].steps.each { step ->
                             step.call()
                 }
             }
-        }}
-    ]
+        }
+    }]
 }
 
 return this

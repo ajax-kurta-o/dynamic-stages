@@ -9,9 +9,9 @@ pipeline {
         }
         stage("DYNAMIC_STAGES") {
             steps {
-                 for (int i = 1; i <= 2; i++) {
-                    sh (script: "echo Iteration")
-                 }
+//                  for (int i = 1; i <= 2; i++) {
+//                     sh (script: "echo Iteration")
+//                  }
                 script {
                     def dynamicStage = [
                         stages: [

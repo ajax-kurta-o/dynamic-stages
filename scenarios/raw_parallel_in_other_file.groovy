@@ -29,7 +29,7 @@ def performStages() {
                     }
                 }
             }
-        }.call()
+        }
     }
 }
 

@@ -13,13 +13,15 @@ def performStages() {
 
     return {
         parallel parallelStages1.collectEntries { dynamicStage ->
-            dynamicStage.stages.each { stage ->
-                stage(stage.stage_name) {
-                    stage.steps.each { step ->
-                        step.call()
+            [(dynamicStage.name): {
+                dynamicStage.stages.each { stage ->
+                    stage(stage.stage_name) {
+                        stage.steps.each { step ->
+                            step.call()
+                        }
                     }
                 }
-            }
+            }]
         }
     }
 }

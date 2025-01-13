@@ -21,7 +21,7 @@ pipeline {
                     ]
                     for (int i = 1; i <= 2; i++) {
                         parallel dynamicStage.stages.each {
-                             separate_stage -> stage (separate_stage.stage_name) {
+                              separate_stage -> stage (separate_stage.stage_name) {
                                     separate_stage.steps.each { step ->
                                         step.call()
                                     }
@@ -32,40 +32,37 @@ pipeline {
                 }
             }
         }
-
-        stage("DYNAMIC_STAGES2") {
-        steps{
-            parallel {
-                stage('Branch A') {
-                    agent any
-                    steps {
-                        echo "On Branch A"
-                    }
+        parallel {
+            stage('Branch A') {
+                agent any
+                steps {
+                    echo "On Branch A"
                 }
-                stage('Branch B') {
-                    agent any
-                    steps {
-                        echo "On Branch B"
-                    }
+            }
+            stage('Branch B') {
+                agent any
+                steps {
+                    echo "On Branch B"
                 }
-                stage('Branch C') {
-                    agent any
+            }
+            stage('Branch C') {
+                agent any
 
-                    stages {
-                        stage('Nested 1') {
-                            steps {
-                                echo "In stage Nested 1 within Branch C"
-                            }
+                stages {
+                    stage('Nested 1') {
+                        steps {
+                            echo "In stage Nested 1 within Branch C"
                         }
-                        stage('Nested 2') {
-                            steps {
-                                echo "In stage Nested 2 within Branch C"
-                            }
+                    }
+                    stage('Nested 2') {
+                        steps {
+                            echo "In stage Nested 2 within Branch C"
                         }
                     }
                 }
             }
-        }}
+        }
+
     }
 }
 

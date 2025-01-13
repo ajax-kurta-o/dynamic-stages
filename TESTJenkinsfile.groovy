@@ -13,7 +13,7 @@ pipeline {
                     if (rollout_stage_passed) {
                         def dynamicLib = getDynamicStages()
                         def performStages = dynamicLib.performStages()
-                        performStages()
+                        performStages().call()
                     } else {
                         echo "Skip running dynamic stages due to failed rollout process"
                     }

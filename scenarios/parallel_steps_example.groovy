@@ -20,6 +20,7 @@ def performStages() {
 
 
     return {
+        {
         parallelStages1.each { dynamicStage ->
             stage(dynamicStage.name) {
                 script {
@@ -32,7 +33,7 @@ def performStages() {
                     }
                 }
             }
-        }
+        }}{
         run1.each { dynamicStage ->
                 stage(dynamicStage.name) {
                     script {
@@ -41,7 +42,7 @@ def performStages() {
                         }
                     }
                 }
-        }
+        }}
     }
 }
 

@@ -16,7 +16,6 @@ pipeline {
             steps{
                 script {
                     echo "Deploy mobile-svc 1.36.1-306.RELEASE"
-                    error "Deploy failed!"
                 }
             }
         }

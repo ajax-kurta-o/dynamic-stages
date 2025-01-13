@@ -9,7 +9,17 @@ def performStages() {
         ]
     ]
 
-    return {
+    def run1 = [
+            [
+                name: "Run BDD tests",
+                stages: [
+                    [stage_name: "Run tests", steps: [ { -> sh "echo 'Run tests'" } ]]
+                ]
+            ]
+        ]
+
+
+    return [{
         parallelStages1.each { dynamicStage ->
             stage(dynamicStage.name) {
                 script {
@@ -23,7 +33,20 @@ def performStages() {
                 }
             }
         }
-    }
+    }],
+    [
+        run1.each { sequentialStage ->
+            stage(sequentialStage.name) {
+                sequentialStage.stages.each { stage ->
+                    stage(stage.stage_name) {
+                        stage.steps.each { step ->
+                            step.call()
+                        }
+                    }
+                }
+            }
+        }
+    ]
 }
 
 return this

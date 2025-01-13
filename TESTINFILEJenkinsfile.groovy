@@ -19,16 +19,16 @@ pipeline {
                             [stage_name: "deploy_b", steps: [ { -> sh "echo 'This is stage b'" } ]]
                         ]
                     ]
-                    for (int i = 1; i <= 2; i++) {
-                        parallel dynamicStage.stages.each {
-                              separate_stage -> stage (separate_stage.stage_name) {
-                                    separate_stage.steps.each { step ->
-                                        step.call()
-                                    }
-                             }
-                        }
-
-                    }
+//                     for (int i = 1; i <= 2; i++) {
+//                         parallel dynamicStage.stages.each {
+//                               separate_stage -> stage (separate_stage.stage_name) {
+//                                     separate_stage.steps.each { step ->
+//                                         step.call()
+//                                     }
+//                              }
+//                         }
+//
+//                     }
                 }
             }
         }

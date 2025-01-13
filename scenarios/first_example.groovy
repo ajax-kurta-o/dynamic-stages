@@ -9,26 +9,15 @@ def performStages() {
         ]
     ]
 
-    def run1 = [
-        [
-            name: "Run BDD tests",
-            stages: [
-                [stage_name: "Run tests", steps: [ { -> sh "echo 'Run tests'" } ]]
-            ]
-        ]
-    ]
-
     return {
         parallel parallelStages1.collectEntries { dynamicStage ->
-            [(dynamicStage.name): {
-                dynamicStage.stages.each { stage ->
-                    stage(stage.stage_name) {
-                        stage.steps.each { step ->
-                            step.call()
-                        }
+            dynamicStage.stages.each { stage ->
+                stage(stage.stage_name) {
+                    stage.steps.each { step ->
+                        step.call()
                     }
                 }
-            }]
+            }
         }
     }
 }

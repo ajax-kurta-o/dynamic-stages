@@ -3,7 +3,10 @@ parallelStages1 = [
     [
         name: "Deploy services",
         branches: [
-            [branch_name: "deploy_a", steps: { script {echo "This is stage a"}} ],
+            [branch_name: "deploy_a", steps: [ { -> script {
+                echo "This is stage a"
+                echo "Oher action in stage a"
+            } }]],
             [branch_name: "deploy_b", steps: [ { -> script { echo "This is stage b"} }]]
         ]
     ]

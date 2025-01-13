@@ -11,7 +11,7 @@ def performStages() {
         ]
     ]
 
-    return [
+    return {
         parallel parallelStages1.collectEntries { dynamicStage ->
             dynamicStage.stages.each { stage ->
                 stage(stage.stage_name) {
@@ -21,7 +21,7 @@ def performStages() {
                 }
             }
         }
-    ]
+    }
 }
 
 return this

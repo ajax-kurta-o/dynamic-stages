@@ -1,5 +1,5 @@
 
-def parallelStages1 = [
+parallelStages1 = [
     [
         name: "Deploy services",
         stages: [
@@ -9,7 +9,7 @@ def parallelStages1 = [
     ]
 ]
 
-def run1 = [
+run1 = [
         [
             name: "Run BDD tests",
             stages: [
